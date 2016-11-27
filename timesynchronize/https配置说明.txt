@@ -1,0 +1,45 @@
+
+http://blog.csdn.net/small____fish/article/details/8214938
+http://www.blogjava.net/stevenjohn/archive/2012/08/22/385989.html
+http://www.blogjava.net/icewee/archive/2012/06/04/379947.html
+
+单向认证需要做的
+1、生成服务器证书库
+keytool -validity 3650 -genkey -v -alias server -keyalg RSA -keystore D:\ssl\server.keystore -dname "CN=19.10.250.112,OU=tekview,O=tekview,L=pudong,ST=Shanghai,c=cn" -storepass tekview12345678 -keypass tekview12345678
+2、导出服务器证书
+keytool -export -v -alias server -keystore D:\ssl\server.keystore -storepass tekview12345678 -rfc -file D:\ssl\server.cer
+3、将服务器证书导入到客户端信任证书库
+keytool -import -v -alias server -file D:\ssl\server.cer -keystore D:\ssl\client.truststore -storepass tekview12345678
+4、配置Tomcat服务器
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" keystoreFile="c:/server.keystore" keystorePass="tekview12345678"/>
+5、配置java客户端
+ System.setProperty("javax.net.ssl.trustStore", "c:/client.truststore");    
+System.setProperty("javax.net.ssl.trustStorePassword","tekview12345678"); 
+
+双向认证
+1、生成服务器证书库
+keytool -validity 3650 -genkey -v -alias server -keyalg RSA -keystore D:\ssl\server.keystore -dname "CN=127.0.0.1,OU=tekview,O=tekview,L=pudong,ST=Shanghai,c=cn" -storepass tekview12345678 -keypass tekview12345678
+2、生成客户端证书库
+keytool -validity 3650 -genkeypair -v -alias client -keyalg RSA -storetype PKCS12 -keystore D:\ssl\client.p12 -dname "CN=client,OU=icesoft,O=icesoft,L=Haidian,ST=Beijing,c=cn" -storepass tekview12345678 -keypass tekview12345678
+3、从客户端证书库中导出客户端证书
+keytool -export -v -alias client -keystore D:\ssl\client.p12 -storetype PKCS12 -storepass tekview12345678 -rfc -file D:\ssl\client.cer
+4、从服务器证书库中导出服务器证书
+keytool -export -v -alias server -keystore D:\ssl\server.keystore -storepass tekview12345678 -rfc -file D:\ssl\server.cer
+5、生成客户端信任证书库(由服务端证书生成的证书库)
+keytool -import -v -alias server -file D:\ssl\server.cer -keystore D:\ssl\client.truststore -storepass tekview12345678
+6、将客户端证书导入到服务器证书库(使得服务器信任客户端证书)
+keytool -import -v -alias client -file D:\ssl\client.cer -keystore D:\ssl\server.keystore -storepass tekview12345678
+7、配置Tomcat服务器
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
+               maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+               clientAuth="true" sslProtocol="TLS" keystoreFile="c:/server.keystore" keystorePass="tekview12345678" truststoreFile="c:/server.keystore" truststorePass="tekview12345678"/>
+8、配置java客户端
+	    System.setProperty("javax.net.ssl.trustStore", "E:/ssl/clienttrust.store");    
+	    System.setProperty("javax.net.ssl.trustStorePassword","tekview12345678"); 
+	    System.setProperty("javax.net.ssl.trustStoreType", "JKS"); 
+	    System.setProperty("javax.net.ssl.keyStore", "E:/ssl/client.p12");    
+	    System.setProperty("javax.net.ssl.keyStorePassword","tekview12345678"); 
+	    System.setProperty("javax.net.ssl.keyStoreType", "PKCS12");  
+

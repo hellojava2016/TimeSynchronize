@@ -1,0 +1,2 @@
+1、在tomcat的\conf\server.xml的Connector中添加URIEncoding="UTF-8"，解决get请求的中文乱码问题(系统中的中文名称查询)
+<Connector connectionTimeout="20000" port="9999" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="UTF-8"/>

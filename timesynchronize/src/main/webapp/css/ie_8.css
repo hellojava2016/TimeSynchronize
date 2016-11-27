@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+.col-md-2{width:16.6%;float:left;}
+.col-md-10{width:83.3%;float:left;}
+.col-sm-3{width: 25%;float:left;}
+.col-xs-3{width: 25%;}
+.col-sm-4{float:left;width: 33.3%;}
+.col-sm-5{float:left;width: 41.6%;}
+.col-sm-offset-5 {margin-left:41.6%;}
+.col-sm-6{width: 50%; float:left;}
+.col-sm-8 {width: 66.6%; float:left;}
+.form-horizontal .control-label{text-align: right;padding-top: 7px;}

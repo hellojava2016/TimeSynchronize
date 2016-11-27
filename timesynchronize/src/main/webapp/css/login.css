@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+body {background:url(../images/login_body.jpg) repeat-x 0 0 scroll #b6e0ff;width:100%;height:100%;overflow:hidden;}
+#login {width: 1000px;margin: 0px auto;background: url(../images/login_bg.jpg) no-repeat center 0 scroll transparent;height: 100%;}
+.login_top{height:285px;width:1000px;}
+.login_main{height:455px;width:1000px;}
+.main_r {-webkit-border-radius:6px;-moz-border-radius:6px;width:451px;background:url(../images/login_main.png) no-repeat 0 0 scroll transparent;height:268px;padding-top:40px;margin:0 auto;}
+.imge_user,.imge_password{width:75px;height:30px;line-height: 30px;background:none;display:inline-block;float:left;font-size:18px;color:#308fd1;}
+.ubd{width:300px;height:40px;}
+.deng{width:250px;height:40px;}
+.ubd{margin:15px auto 0;}
+.ubd input{border:1px none;height:30px;float:left;color:#333;width:200px;line-height:30px;color:#CCCCCC;border: 1px solid #CCC;text-indent: 1em;}
+.frm{width:265px;margin:10px auto;color:#666666;position:relative;height:20px;padding-left: 105px;}
+.frm span{position:absolute;top:0px;}
+input.login{width:235px;height:48px; background:url(../images/deng_btn.png) no-repeat 0 0 scroll transparent;color:#FFF;border:none;font-size:16px;font-weight:700; cursor:pointer;}
+input.login:hover{background-position:0 -66px;color:#FFF;border:none;font-size:16px;font-weight:700;}
+input.login:active{background-position:0 -66px;color:#FFF;border:none;font-size:16px;font-weight:700;}
+.deng{margin:15px auto 0;}
+.register{width:265px;margin:30px auto 0;}
+.register input{border:1px none;height:40px;float:left;color:#333;width:115px;line-height:40px;margin-right:34px;color:#666666;text-align:center;}
+.dpfont{color:#FFF;border:none;font-size:16px;font-weight:700;}
