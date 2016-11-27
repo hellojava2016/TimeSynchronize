@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan base-package="cn.gov.cbrc.bankriskcontrol"
+	<context:component-scan base-package="com.shtitan.timesynchronize"
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
@@ -77,7 +77,7 @@
 	</bean>
 
     <mvc:interceptors>
-        <bean class="cn.gov.cbrc.bankriskcontrol.service.LogInterceptor"/>
-        <bean class="cn.gov.cbrc.bankriskcontrol.service.PageInterceptor"/>
+        <bean class="com.shtitan.timesynchronize.service.LogInterceptor"/>
+        <bean class="com.shtitan.timesynchronize.service.PageInterceptor"/>
     </mvc:interceptors>  
 </beans>

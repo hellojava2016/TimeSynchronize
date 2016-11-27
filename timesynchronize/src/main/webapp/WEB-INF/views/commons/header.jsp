@@ -20,7 +20,6 @@ font-size: 22px;
       <ul>
         <li class="menu_li1"><a href="${ctx}/report/systemavailablerate/list.do">数据采集</a></li>        
         <c:if test="${fn:contains(permisions, 'risk:analyse')}"><li class="menu_li2"><a href="${ctx}/report/systemavailablerate/report_pre.do">风险分析</a></li></c:if>
-        <li class="menu_li4"><a href="${ctx}/asset/host/list.do">配置信息</a></li>
         <li class="menu_li5"><a href="${ctx}/user/list.do">系统配置</a>        
         </li>
       </ul>

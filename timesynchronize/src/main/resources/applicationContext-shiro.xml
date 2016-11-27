@@ -13,7 +13,7 @@
 		<property name="cacheManager" ref="shiroEhcacheManager" />
 	</bean>
 
-	<bean id="shiroDbRealm" class="cn.gov.cbrc.bankriskcontrol.service.account.ShiroDbRealm">
+	<bean id="shiroDbRealm" class="com.shtitan.timesynchronize.service.account.ShiroDbRealm">
 		<property name="userService" ref="userService" />
 	</bean>
 

@@ -18,41 +18,9 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<bean id="restSample" class="cn.gov.cbrc.bankriskcontrol.rest.ReportWebService" />
-	<bean id="resourceSample" class="cn.gov.cbrc.bankriskcontrol.rest.ResourceWebService" />
-	<bean id="messageSample" class="cn.gov.cbrc.bankriskcontrol.rest.MessageWebService" />
+	<bean id="messageSample" class="com.shtitan.timesynchronize.rest.MessageWebService" />
 
 	<!-- 这里的地址很重要，客户端需要通过这个地址来访问WebService -->
-
-	<jaxrs:server id="restServiceContainer" address="/risk/">
-		<jaxrs:serviceBeans>
-			<ref bean="restSample" />			
-		</jaxrs:serviceBeans>
-
-		<jaxrs:extensionMappings>
-			<entry key="json" value="application/json" />
-			<entry key="xml" value="application/xml" />
-		</jaxrs:extensionMappings>
-
-		<jaxrs:languageMappings>
-			<entry key="en" value="en-gb" />
-		</jaxrs:languageMappings>
-	</jaxrs:server>
-	
-	<jaxrs:server id="restServiceContainer2" address="/asset/">
-		<jaxrs:serviceBeans>
-			<ref bean="resourceSample" />			
-		</jaxrs:serviceBeans>
-
-		<jaxrs:extensionMappings>
-			<entry key="json" value="application/json" />
-			<entry key="xml" value="application/xml" />
-		</jaxrs:extensionMappings>
-
-		<jaxrs:languageMappings>
-			<entry key="en" value="en-gb" />
-		</jaxrs:languageMappings>
-	</jaxrs:server>
 	
 	<jaxrs:server id="restServiceContainer3" address="/message/">
 		<jaxrs:serviceBeans>
