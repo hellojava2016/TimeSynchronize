@@ -25,7 +25,6 @@
 <script src="${ctx}/js/twaver/demo.js" type="text/javascript" ></script>
 <script src="${ctx}/js/jquery.url-0.0.1.js" type="text/javascript" ></script>
 
-<script src="${ctx}/js/websocket/sockjs-1.1.1.min.js" type="text/javascript" ></script>
 
 </head>
 <body>
@@ -54,7 +53,7 @@ $(function (){
 	var chassisDemo = new ChassisDemo();
 	chassisDemo.init();
 	
-	
+	/**
 	var websocket;  
     if ('WebSocket' in window) {  
         websocket = new WebSocket("ws://localhost:8080/timesynchronize/websocket");  
@@ -73,7 +72,7 @@ $(function (){
     websocket.onclose = function (evnt) {  
     } 
 
-	
+	*/
 });	
 
 ChassisDemo = function () {
