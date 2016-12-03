@@ -4,7 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <%@ include file="../commons/bankajax.jsp" %>
+<script type="text/javascript">
+    var ctx = "${ctx}";
+</script>
 <script src="${ctx}/js/bootstrap/jquery.bootstrap.min.js" type="text/javascript" ></script>
+
+
 <style>
 #gundongdiv{
 float: left;padding:30px 20px 10px 0;
@@ -18,9 +23,11 @@ font-size: 22px;
     <div class="logo"></div>
     <div class="sl_menu">
       <ul>
+      <li class="menu_li5"><a href="${ctx}/chassis/list.do">面板图</a>
         <li class="menu_li1"><a href="${ctx}/report/systemavailablerate/list.do">数据采集</a></li>        
         <c:if test="${fn:contains(permisions, 'risk:analyse')}"><li class="menu_li2"><a href="${ctx}/report/systemavailablerate/report_pre.do">风险分析</a></li></c:if>
-        <li class="menu_li5"><a href="${ctx}/user/list.do">系统配置</a>        
+        <li class="menu_li5"><a href="${ctx}/user/list.do">系统配置</a>
+                
         </li>
       </ul>
     </div>    
