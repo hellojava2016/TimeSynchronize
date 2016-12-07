@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.SimpleTimeZone;
 
+import org.apache.commons.lang.time.FastDateFormat;
+
 /**
  *  处理日期相关的操作
  * @author ppl
@@ -17,7 +19,7 @@ public class DateUtil {
 	public final static SimpleDateFormat SHORT_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	public final static SimpleDateFormat COMMON_FORMAT = new SimpleDateFormat("yyyyMMddHHmmss");
 	public final static SimpleDateFormat HHMM_FORMAT = new SimpleDateFormat("HH:mm");
-	
+	public final static FastDateFormat HHMMSS_FORMAT = FastDateFormat.getInstance("HH:mm:ss");
 	//0时区时间的Format
 	public final static SimpleTimeZone timeZone0 = new SimpleTimeZone(0,"GMT");
 	public final static SimpleDateFormat LONG_FORMAT_GMT0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -340,6 +342,25 @@ public class DateUtil {
 			return cal1.get(0) == cal2.get(0) && cal1.get(1) == cal2.get(1);
 		}
 	}
+	
+	 /**
+     * 根据传入的参数获取Quartz的cron表达式
+     * @param date 时间对象
+     * @param type 1:时间;2:日期+时间
+     * @return 
+     */
+    public static String getDateTimeCronTriggerExpr(Date date, int type){
+        StringBuilder expr = new StringBuilder();
+        if(type == 0){
+            String[] timeArr = HHMMSS_FORMAT.format(date).split(":");
+            if(timeArr.length == 3){
+                expr.append(timeArr[2]).append(" ").append(timeArr[1]).append(" ").append(timeArr[0]);
+            }else{
+                expr.append("0").append(" ").append("0").append(" ").append("0");
+            }
+        }
+        return expr.toString();
+    }
 
 
 }
