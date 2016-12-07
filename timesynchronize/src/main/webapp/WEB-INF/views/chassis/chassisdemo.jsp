@@ -52,27 +52,23 @@
 $(function (){
 	var chassisDemo = new ChassisDemo();
 	chassisDemo.init();
-	
-	/**
-	var websocket;  
-    if ('WebSocket' in window) {  
-        websocket = new WebSocket("ws://localhost:8080/timesynchronize/websocket");  
-    } else if ('MozWebSocket' in window) {  
-        websocket = new MozWebSocket("ws://localhost:8080/timesynchronize/websocket");  
-    } else {  
-        websocket = new SockJS("http://localhost:8080/timesynchronize/webSocket");  
-    }  
+
+	var websocket = new WebSocket("ws://localhost:8080/timesynchronize/sendMessage?deviceName='ne=504103:/'");  
+    
     websocket.onopen = function (evnt) {  
     };  
-    websocket.onmessage = function (evnt) {  
-        $("#msgcount").html("(<font color='red'>"+evnt.data+"</font>)")  
+    websocket.onmessage = function (evnt) {
+    	alert("接收告警:"+evnt.data);
+        //$("#msgcount").html("(<font color='red'>"+evnt.data+"</font>)")  
+        var alarm = eval('(' + evnt.data + ')'); 
+        chassisDemo.onAlarm(alarm.sourceId,alarm.sourceId,alarm.alarmSeverity);
     };  
     websocket.onerror = function (evnt) {  
     };  
     websocket.onclose = function (evnt) {  
     } 
 
-	*/
+	
 });	
 
 ChassisDemo = function () {
@@ -112,7 +108,17 @@ twaver.Util.ext('ChassisDemo', Object, {
         var self = this;
        
     },
-     
+    onAlarm: function (alarmID, elementID, severityVal) {
+    	
+    	var aid = alarmID+demo.Util.randomInt(100);
+        var alarm2 = new twaver.Alarm(aid, elementID);
+        var severities = twaver.AlarmSeverity.severities;
+        var severity=severities.get(severityVal);
+        alarm2.setAlarmSeverity(severity);
+        alarm2.setClient('raisedTime', new Date());
+        var alarmBox = this.box.getAlarmBox();
+        alarmBox.add(alarm2);
+    },
     registImages: function () {
         this.registerImage("${ctx}/images/chassis/bolt.png");
         for (var i = 1; i <= 10; i++) {
@@ -150,10 +156,17 @@ twaver.Util.ext('ChassisDemo', Object, {
         }
     },
     initBox: function () {
-        this.box.clear();
-
-        var first = this.createNode(null, 16, 11, "chassis9");
+        this.box.clear();      
+        var first = new twaver.Follower("ne=504103:/");
+        first.setStyle('outer.padding', 2);
+        first.setStyle('select.color', '#000000');      
+        first.setParent(null);
+       
+        first.setLocation(16, 11);
+        first.setImage("chassis9");
         first.setStyle('outer.padding', 1);
+        this.box.add(first);
+
 
         var cardContainer = this.createNode(first, 44, 27, null, 638, 269);
         cardContainer.setStyle('vector.fill.color', '#AAAAAA');

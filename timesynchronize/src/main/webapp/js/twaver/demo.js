@@ -329,6 +329,7 @@ demo.Util = {
         var b = demo.Util.randomInt(255);
         return '#' + demo.Util._formatNumber((r << 16) | (g << 8) | b);
     },
+   
     randomAlarm: function (alarmID, elementID, nonClearedSeverity) {
         var alarm = new twaver.Alarm(alarmID, elementID);
         alarm.setAcked(demo.Util.randomBoolean());
